@@ -25,7 +25,7 @@ class TestController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                      [
-                        'actions' => [ 'index'],
+                         'actions' => [ 'index', 'error1', 'error2'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -55,8 +55,46 @@ class TestController extends Controller
     public function actionIndex()
     {
         $apple = new Apple();
-        VarDumper::dump($apple);
+        echo "Цвет: $apple->цвет <br>";
+        $apple->упасть();
+        echo "Упасть<br>";
+        $apple->съесть(50);
+        echo "Съесть(50)<br>";
+        echo "Остаток: $apple->остаток <br>";
+        $apple->съесть(60);
+        echo "Съесть(50)<br>";
+        echo "Остаток: $apple->остаток <br>";
     }
-
+    
+    public function actionError1()
+    {
+        $apple = new Apple();
+        echo "Цвет: $apple->цвет <br>";
+        $apple->упасть();
+        echo "Упасть<br>";
+        $apple->съесть(25);
+        echo "Съесть(25)<br>";
+        echo "Остаток: $apple->остаток <br>";
+        $apple->упасть();
+        echo "Упасть<br>";
+    }
+    
+    public function actionError2()
+    {
+        $apple = new Apple();
+        echo "Цвет: $apple->цвет <br>";
+        $apple->упасть();
+        echo "Упасть<br>";
+        $apple->съесть(70);
+        echo "Съесть(70)<br>";
+        echo "Остаток: $apple->остаток <br>";
+        $apple->съесть(70);
+        echo "Съесть(70)<br>";
+        echo "Остаток: $apple->остаток <br>";
+        $apple->съесть(70);
+        echo "Съесть(70)<br>";
+        echo "Остаток: $apple->остаток <br>";
+        
+    }
     
 }
