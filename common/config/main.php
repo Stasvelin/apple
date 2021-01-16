@@ -10,9 +10,9 @@ return [
     'components' => [
         'db'=>[
         'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=127.0.0.1;dbname=',
-        'username' => '',
-        'password' => '',
+        'dsn' => 'mysql:host=127.0.0.1;dbname=oko-gsm_azsrp',
+        'username' => '045223259_azsrp',
+        'password' => 'ch9387fhsdh8303i',
         'charset' => 'utf8',
         ]
     ],

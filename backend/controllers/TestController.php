@@ -5,11 +5,13 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use common\models\LoginForm;
+use backend\models\Apple;
 
 /**
  * Test controller
- * Для проверки методов класса Apple 
+ * пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Apple 
  */
 class TestController extends Controller
 {
@@ -22,23 +24,14 @@ class TestController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
+                     [
+                        'actions' => [ 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+            
         ];
     }
 
@@ -61,9 +54,8 @@ class TestController extends Controller
      */
     public function actionIndex()
     {
-        $hash = Yii::$app->getSecurity()->generatePasswordHash("Тест");
-        echo "$hash";
-        //return $this->render('index');
+        $apple = new Apple();
+        VarDumper::dump($apple);
     }
 
     
