@@ -14,6 +14,13 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+        'db'=>[
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=127.0.0.1;dbname=oko-gsm_azsrp',
+            'username' => '045223259_azsrp',
+            'password' => 'ch9387fhsdh8303i',
+            'charset' => 'utf8',
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
             'baseUrl' => '/backend',
