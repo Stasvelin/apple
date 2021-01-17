@@ -29,3 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
+<script>
+function Откусить(id){
+	$("#eat-form"+id).slideToggle();
+	return false;
+}
+
+function Сбросить(id){
+	return true;
+}
+
+function Удалить(id){
+	return true;
+}
+</script>

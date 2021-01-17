@@ -65,7 +65,7 @@ class Apple extends ActiveRecord
     
     public function init()
     {
-        if($this->id > 0) return;
+        if(!$this->isNewRecord) return;
         $this->цвет = rand(0,2);
         $this->датаПоявления = time() - rand(0,3600*24*30);
         $this->остаток = 100;

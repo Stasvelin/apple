@@ -84,8 +84,9 @@ class AppleController extends Controller
     public function actionEat($id)
     {
         $model = Apple::findOne($id);
-        
-        if ($model->съесть(40) && $model->save()) {
+        $params = Yii::$app->request->get();
+        $percent = $params['EatForm']['percent'];
+        if ($model->съесть($percent) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->id]);
         }
         return $this->render('error');
