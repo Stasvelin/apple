@@ -22,6 +22,74 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style>
+body {
+    font-family: "PT Root UI",Roboto,Helvetica,sans-serif;
+    padding: 20px;
+}
+.шапка {
+    padding: 10px;
+}
+.основнойБлок{
+    display:inline;
+    float:left; 
+    padding: 10px;
+}
+p {
+
+}
+a {
+color: black;
+}
+a.hover {
+color: blue;
+}
+#главноеОкно{
+    padding-left:80px;
+}
+.элементСписка{
+background: #cdf;
+border-radius: 10px;
+padding:15px;
+margin:15px;
+box-shadow: 6px 6px 6px 0 #ccc;
+}
+.элементСписка .заголовок{
+    font-size: 13px;
+    font-weight: bold;
+    
+}
+.элементСписка p{
+    font-size: 11px;
+    margin: 3px;
+}
+.элементСписка .параметр{
+    
+}
+.элементСписка .параметр .имяПараметра{
+    font-weight: bold;
+}
+.элементСписка .параметр .значениеПараметра{
+
+}
+.полеВвода{
+background: white;
+border-radius: 8px;
+border: 1px solid grey; /* Белая рамка */
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+.полеВвода input{
+border: 0px;
+}
+
+.полеВвода:hover{
+background-color: #eee;
+
+}
+
+</style>            
 </head>
 <body>
 <?php $this->beginBody() ?>

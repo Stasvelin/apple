@@ -3,15 +3,12 @@ namespace backend\controllers;
 
 use Yii;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\helpers\VarDumper;
-use common\models\LoginForm;
 use backend\models\Apple;
 
 /**
  * Test controller
- * ��� �������� ������� ������ Apple 
+ * контроллер для проверки модели Apple 
  */
 class TestController extends Controller
 {
@@ -61,7 +58,7 @@ class TestController extends Controller
         $apple->съесть(50);
         echo "Съесть(50)<br>";
         echo "Остаток: $apple->остаток <br>";
-        $apple->съесть(60);
+        $apple->съесть(50);
         echo "Съесть(50)<br>";
         echo "Остаток: $apple->остаток <br>";
     }

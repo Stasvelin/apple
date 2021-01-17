@@ -5,6 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\base\UserException;
+use yii\helpers\Url;
 
 /**
  * Класс-модель яблок
@@ -18,13 +19,14 @@ use yii\base\UserException;
  */
 class Apple extends ActiveRecord
 {
+    /*
     public $id
     ,$цвет
     ,$датаПоявления
     ,$датаПадения
     ,$состояние
     ,$остаток;
-    
+    */
     const СРОК_ГОДНОСТИ = 5*3600;
     /**
      * {@inheritdoc}
@@ -40,7 +42,9 @@ class Apple extends ActiveRecord
     public function rules()
     {
         return [
-            
+            [['цвет', 'датаПоявления', 'остаток'], 'required'],
+            [['цвет', 'датаПоявления', 'остаток'], 'integer'],
+            [['цвет', 'датаПоявления', 'остаток'], 'safe'],
         ];
     }
     
@@ -61,7 +65,8 @@ class Apple extends ActiveRecord
     
     public function init()
     {
-        $this->цвет = rand(0,3);
+        if($this->id > 0) return;
+        $this->цвет = rand(0,2);
         $this->датаПоявления = time() - rand(0,3600*24*30);
         $this->остаток = 100;
         $this->состояние = 0; //висит на ветке
@@ -104,4 +109,33 @@ class Apple extends ActiveRecord
         }
     }
 
+    public function getListEntryData(){
+        $data = [];
+        $data['title'] = 'Яблоко '.ЦветСредний::one($this->цвет);
+        $data['ID'] = $this->id;
+        $data['Cостояние'] = Состояние::oneH($this->состояние);
+        $data['Дата появления'] = 
+        Yii::$app->Formatter->asDate($this->датаПоявления, 'dd.MM.yyyy H:i'); 
+        if ($this->состояние == 1){
+            $data['Дата падения'] = 
+            Yii::$app->formatter->asDate($this->датаПоявления, 'dd.MM.yyyy H:i')."(".
+            Yii::$app->formatter->format($this->датаПоявления,'relativeTime').")";
+        }
+        if ($this->состояние == 1){
+            $data['Остаток'] = $this->остаток.'%';
+        }
+        $data['addLinks'] = [];
+        if ($this->состояние > 1){
+            $data['addLinks']['Удалить'] = 'apple/delete';
+        }
+        if ($this->состояние == 0){
+            $data['addLinks']['Сбросить'] = 'apple/drop';
+        }
+        
+        return $data;
+    }
+    
+    public function getЦвет(){
+        return Цвет::one($this->цвет);
+    }
 }
