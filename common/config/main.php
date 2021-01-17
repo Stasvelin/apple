@@ -19,7 +19,7 @@ return [
     'modules'=> [
         'debug' => [
         'class' => 'yii\debug\Module',
-        'allowedIPs' => ['83.149.37.97', '::1'],
+        'allowedIPs' => ['31.173.120.141', '::1'],
     ],
         'gii' => [
             'class' => 'yii\gii\Module',

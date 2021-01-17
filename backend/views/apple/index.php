@@ -23,11 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
     \yii\widgets\ListView::widget([
          'dataProvider' => $dataProvider,
         'layout' => "{pager}\n{items}\n{summary}",
-        //'layout' => "{items}\n",
         'itemView' => '_list_item']);
-        
-                
-    
+
     ?>
 
 

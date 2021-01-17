@@ -29,7 +29,7 @@ foreach ($data as $l=>$v){
     ?><p class='параметр'><?php 
     foreach ($addLinks as $label=>$route){
         
-        echo Html::a($label, [$route], ['class' => 'ссылка'],["id"=>$model->id]);
+        echo Html::a($label, $route, ['class' => 'ссылка']);
     }
     ?></p>
     

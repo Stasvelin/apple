@@ -42,9 +42,9 @@ class Apple extends ActiveRecord
     public function rules()
     {
         return [
-            [['цвет', 'датаПоявления', 'остаток'], 'required'],
-            [['цвет', 'датаПоявления', 'остаток'], 'integer'],
-            [['цвет', 'датаПоявления', 'остаток'], 'safe'],
+            
+            [['цвет', 'датаПоявления', 'датаПадения', 'остаток', 'состояние'], 'integer'],
+            
         ];
     }
     
@@ -79,6 +79,17 @@ class Apple extends ActiveRecord
         }
         $this->состояние = 1;
         $this->датаПадения = time();
+        return true;
+    }
+    
+    public function удалить(){
+        $this->проверитьСвежесть();
+        if ($this->состояние >= 2 ){ //полностью съедено или испортилось
+            return true;
+        }
+        throw new UserException('Ошибка: невозможно удалить не съеденое и не испортившееся яблоко');
+        return false;
+        
     }
     
     public function съесть($процент){
@@ -99,6 +110,7 @@ class Apple extends ActiveRecord
         $процент = $процент < 0 ? 0 : $процент > $this->остаток ? $this->остаток : $процент;
         $this->остаток -= $процент;
         if ($this->остаток == 0) $this->состояние = 3;
+        return true;
     }
     
     protected function проверитьСвежесть(){
@@ -110,6 +122,7 @@ class Apple extends ActiveRecord
     }
 
     public function getListEntryData(){
+        $this->проверитьСвежесть();
         $data = [];
         $data['title'] = 'Яблоко '.ЦветСредний::one($this->цвет);
         $data['ID'] = $this->id;
@@ -118,18 +131,21 @@ class Apple extends ActiveRecord
         Yii::$app->Formatter->asDate($this->датаПоявления, 'dd.MM.yyyy H:i'); 
         if ($this->состояние == 1){
             $data['Дата падения'] = 
-            Yii::$app->formatter->asDate($this->датаПоявления, 'dd.MM.yyyy H:i')."(".
-            Yii::$app->formatter->format($this->датаПоявления,'relativeTime').")";
+            Yii::$app->formatter->asDate($this->датаПадения, 'dd.MM.yyyy H:i')." (".
+            Yii::$app->formatter->format($this->датаПадения,'relativeTime').")";
         }
         if ($this->состояние == 1){
             $data['Остаток'] = $this->остаток.'%';
         }
         $data['addLinks'] = [];
         if ($this->состояние > 1){
-            $data['addLinks']['Удалить'] = 'apple/delete';
+            $data['addLinks']['Удалить'] = ['apple/delete', "id"=>$this->id];
         }
         if ($this->состояние == 0){
-            $data['addLinks']['Сбросить'] = 'apple/drop';
+            $data['addLinks']['Сбросить'] = ['apple/drop', "id"=>$this->id];
+        }
+        if ($this->состояние == 1){
+            $data['addLinks']['Откусить'] = ['apple/eat', "id"=>$this->id];
         }
         
         return $data;
