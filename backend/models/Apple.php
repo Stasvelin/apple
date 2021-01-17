@@ -129,7 +129,7 @@ class Apple extends ActiveRecord
         $data['Cостояние'] = Состояние::oneH($this->состояние);
         $data['Дата появления'] = 
         Yii::$app->Formatter->asDate($this->датаПоявления, 'dd.MM.yyyy H:i'); 
-        if ($this->состояние == 1){
+        if ($this->состояние > 0){
             $data['Дата падения'] = 
             Yii::$app->formatter->asDate($this->датаПадения, 'dd.MM.yyyy H:i')." (".
             Yii::$app->formatter->format($this->датаПадения,'relativeTime').")";

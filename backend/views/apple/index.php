@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $searchModel app\models\МодульSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-
+$this->title = 'Список яблок';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Создать', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать яблоко', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
      <?=
